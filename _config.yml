@@ -1,0 +1,7 @@
+title: WyyOIer
+
+author: WyyOIer
+
+# Local search
+local_search:
+  enable: true

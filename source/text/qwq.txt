@@ -1,0 +1,80 @@
+<div id="category-tree">
+        <%
+            const structure = (input) => {
+                var output = [];
+                input.forEach(function(post) {
+                    var list = post.slug.split("/");
+                    var curNode = output;
+                    for(var i = 0;i <  list.length;i++) {
+                        if(list[i] == '') {
+                            break;
+                        }
+                        var now = list[i], lst = curNode;
+                        for(var j = 0;j < curNode.length;j++) {
+                            if(curNode[j].title == now) {
+                                curNode = curNode[j].children;
+                                break;
+                            }
+                        }
+                    }
+    
+                    if(lst == curNode) {
+                        var newNode = curNode[j] = {
+                            post: post,
+                            title: now,
+                            children: []
+                        };
+                        curNode = newNode.children;
+                    }
+                    else {
+                        delete curNode.children
+                    }
+                });
+                return output;
+            }
+        %>
+    
+        <%
+            const output_tree = (input) => {
+                input.sort(function(a, b) {
+                    var len = a.title.length > b.title.length ? a.title.length : b.title.length;
+                    for(var i = 0;i < len;i++) {
+                        if(a.title[i].charCodeAt() - b.title[i].charCodeAt()) {
+                            return a.title[i].charCodeAt() - b.title[i].charCodeAt();
+                        }
+                    }
+                });
+    
+                input.forEach(function(node) {
+                    if(node.children == 0) {
+        %>
+    
+                        <ul>
+                            <li class = "file<%- (is_post() && node.post._id == page._id) ? ' active' : '' %>">
+                                <a href = "<%- config.root %><%- node.post.path %>">
+                                    <i class = "fa fa-file"></i>
+                                    <%- node.title %>
+                                </a>
+                            </li>
+                        </ul>
+        <%
+                    }
+                    else {
+        %>
+                        <ul>
+                            <li class = "directory">
+                                <a href = "#" class = "directory">
+                                    <i class = "fa fa-folder"></i>
+                                    <%- node.title %>
+                                </a>
+                                <%- output_tree(node.children) %>
+                            </li>
+                        </ul>
+        <%
+                    }
+                });
+            }
+            output_tree(structure(site.posts))
+        %>
+    
+    </div>

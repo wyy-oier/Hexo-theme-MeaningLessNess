@@ -1,0 +1,91 @@
+<head>
+    <title> <%- page.title %> - <%- theme.author %> </title>
+  	<link rel="stylesheet" href="/css/main.css">
+  	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type = "text/javascript" async src="/javascript/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+
+
+    <script type="text/javascript" src="/javascript/codeBlocks/codeBlockFuction.js"></script>
+    <script type="text/javascript" src="/javascript/codeBlocks/codeCopy.js"></script>
+    <script type="text/javascript" src="/javascript/codeBlocks/clipboard.min.js"></script>
+    <script type="text/javascript" src="/javascript/codeBlocks/codeShrink.js"></script> 
+    <style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
+   
+    
+    <!--
+    <link rel="stylesheet" href="/prism/prism-line-numbers.min.css">
+    <script src="/prism/prism-line-numbers.min.js"></script>
+    -->
+
+    <link rel="stylesheet" href="/highlight/styles/atom-one-dark.min.css">
+    <script src="/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+
+<% if(is_post() == true) { %>
+
+    <div style = "width: 10%;height: 100%;float: left">
+    </div>
+
+    <div id = "article">
+
+        <div id = "post-title"> <%- page.title %> </div>
+        <div id = "post-author"> By <%- theme.author %> </div>
+        <br>
+        <div id = "post-date"> created on <%- date(page.date, "YYYY-MM-DD HH:mm:ss") %> </div>
+        <div id = "post-updated"> updated on <%- date(page.updated, "YYYY-MM-DD HH:mm:ss") %> </div>
+        <%- page.content %>
+
+        <script>
+            var labelList = $("#article").children(), imgList = [];
+            console.log('labellength: ' + labelList.length);
+            var res = 0;
+            
+
+            function dfs(ulist) {
+                for(var i = 0;i < ulist.length;i++) {
+                    console.log(ulist[i]);
+                    if($(ulist[i]).is("img")) {
+                        imgList.push({node: $(ulist[i]), alt: ulist[i].alt});
+                    }
+                    var vlist = ulist[i].children;
+                    if(vlist.length != 0) {
+                        dfs(vlist);
+                    }
+                }
+
+            }
+
+            dfs(labelList);
+
+            imgList.forEach(function (image) {
+                image.node.after('<p class = image-name>' + image.alt + '</p>');
+            });
+
+            console.log('res: ' + res);
+
+        </script>
+
+    </div>
+
+    <div id = "toc">
+    </div>
+
+<% } %>
+
+</body>

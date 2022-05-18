@@ -1,0 +1,27 @@
+<html>
+  <head>
+  	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  	<link rel="stylesheet" href="/css/main.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <script type="text/javascript" src="/javascript/local_search.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title> <%- theme.author %> </title>
+  </head>
+  <body>
+    <div id = "background">
+      <div id = "index"> 
+        <%- partial('_partial/sidebar') %>
+      </div>
+      
+    </div>
+    <div id = "postlist">
+      <%- partial('_partial/postlist') %>
+    </div>
+
+    <div id = "search-border">
+      <button onclick = "closeSearch()"><i class="fa fa-times-circle"></i></button>
+    </div>
+  </body>
+</html>

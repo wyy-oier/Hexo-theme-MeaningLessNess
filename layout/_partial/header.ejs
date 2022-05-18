@@ -1,0 +1,84 @@
+<div style="height: 11%;width: 100%;position: fixed;z-index: 9999;">
+
+  <!-- 主站 -->
+
+  <div style="height: 13%;width: 20%;float: left">
+    <a href="" style="font-family: Consolas;font-size: 32px;" class="mylink"><p style="text-align:center">WyyOIer</p></a>
+  </div>
+
+  <!-- 分页 -->
+
+  <div style="height: 13%;width: 35%;float: left">
+
+    <div style="height: 20px;width: 500px;float: up">
+
+    </div>
+
+    <div style="height: 25px;width: 70px;float: left">
+      <a href="#" style="font-size: 16px" class="button"><i class="fa fa-home fa-1x" aria-hidden="true"></i> 首页</a>
+    </div>  
+
+    <div style="height: 25px;width: 30px;float: left">
+
+    </div>
+
+    <div style="height: 25px;width: 70px;float: left">
+      <a href="#" style="font-size: 16px" class="button"><i class="fa fa-search fa-1x" aria-hidden="true"></i> 搜索</a>
+    </div>
+
+    <div style="height: 25px;width: 30px;float: left">
+      
+    </div>
+
+    <div style="height: 25px;width: 70px;float: left">
+      <a href="#" style="font-size: 16px" class="button"><i class="fa fa-user fa-1x" aria-hidden="true"></i> 关于</a>
+    </div>
+    
+    <div style="height: 25px;width: 30px;float: left">
+      
+    </div>
+
+    <div style="height: 25px;width: 70px;float: left">
+      <a href="#" style="font-size: 16px" class="button"><i class="fa fa-link fa-1x" aria-hidden="true"></i> 友链</a>
+    </div>
+
+  </div>
+
+  <!-- 音乐 -->
+
+  <script>
+    function changemusicid(){
+      var v = document.getElementById("num").value, text, f = 0;
+      if(v == null || v == "") {
+        text = "输入不能为空。";
+        f = 1;
+      }
+      if(f == 0) document.getElementById("music").innerHTML= '<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=350 height=95 src="//music.163.com/outchain/player?type=2&id=' + v + '&auto=0&height=66"></iframe> ';
+      else document.getElementById("musictext").innerHTML = text;
+    }
+  </script>
+
+  <div style="height: 13%;width: 30%;float: left" id="music">
+    <input id = "num" placeholder = "输入网易音乐 id，如 480517594" style = "width: 200px;">
+    <button type="button" onclick="changemusicid()">提交</button>
+    <p id = "musictext"></p>
+  </div>
+
+  <!-- 时间 -->
+  
+  <div style="height: 13%;width: 15%;float: left">
+    <p id="site-time" style="text-align: center;font-family: consolas;font-size: 20px"></p>
+      <script>
+        function mytime(){
+          var a = new Date();
+          var b = a.toLocaleTimeString();
+          var c = a.toLocaleDateString();
+          document.getElementById("site-time").innerHTML = c + "<br>" + b;
+        }
+        setInterval(function() {mytime()}, 10);
+      </script>
+    </div>
+  </div>  
+
+</div>
+
