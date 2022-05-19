@@ -20,10 +20,9 @@
 var searchFunc = function (path, search_id, content_id) {
     // 0x00. environment initialization
     'use strict';
-    var BTN = "<i id='local-search-close'>×</i>";
     var $input = document.getElementById(search_id);
     var $resultContent = document.getElementById(content_id);
-    $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+    $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
     console.log("...");
     $.ajax({
       // 0x01. load xml file
@@ -49,6 +48,8 @@ var searchFunc = function (path, search_id, content_id) {
             return;
           }
           // 0x04. perform local searching
+
+          var cnt = 0;
           datas.forEach(function (data) {
             var isMatch = true;
             var content_index = [];
@@ -86,43 +87,49 @@ var searchFunc = function (path, search_id, content_id) {
             }
             // 0x05. show search results
             if (isMatch) {
+              cnt++;
               str += "<li><a href='" + data_url + "' class='search-result-title' target='_blank'>" + orig_data_title + "</a>";
-              var content = orig_data_content;
-              if (first_occur >= 0) {
-                // cut out 100 characters
-                var start = first_occur - 20;
-                var end = first_occur + 80;
+              // var content = orig_data_content;
+              // if (first_occur >= 0) {
+              //   // cut out 100 characters
+              //   var start = first_occur - 10;
+              //   var end = first_occur + 20;
+              //   console.log("start: " + start);
+              //   console.log("end: " + end);
+
+              //   if (start < 0) {
+              //     start = 0;
+              //   }
   
-                if (start < 0) {
-                  start = 0;
-                }
+              //   if (start == 0) {
+              //     end = 30;
+              //   }
   
-                if (start == 0) {
-                  end = 100;
-                }
+              //   if (end > content.length) {
+              //     end = content.length;
+              //   }
   
-                if (end > content.length) {
-                  end = content.length;
-                }
+              //   var match_content = content.substr(start, end);
   
-                var match_content = content.substr(start, end);
+              //   // highlight all keywords
+              //   keywords.forEach(function (keyword) {
+              //     var regS = new RegExp(keyword, "gi");
+              //     match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+              //   });
   
-                // highlight all keywords
-                keywords.forEach(function (keyword) {
-                  var regS = new RegExp(keyword, "gi");
-                  match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                });
-  
-                str += "<p class=\"search-result\">" + match_content + "...</p>"
-              }
+              //   str += "<p class=\"search-result\">" + match_content + "...</p>"
+              // }
               str += "</li>";
             }
           });
           str += "</ul>";
           if (str.indexOf('<li>') === -1) {
-            return $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
           }
-          $resultContent.innerHTML = BTN + str;
+          else {
+            str += "<p class = 'local-search-count'>共搜索到 " + cnt + " 篇文章。</p>";
+          }
+          $resultContent.innerHTML = str;
         });
       }
     });
@@ -135,4 +142,17 @@ var searchFunc = function (path, search_id, content_id) {
   var getSearchFile = function(){
       var path = "/search.xml";
       searchFunc(path, 'local-search-input', 'local-search-result');
+  }
+ 
+  function Search() {
+      document.getElementById("search-border").style.display = "block";
+      document.getElementById("postlist").style.pointerEvents = "none";
+      document.getElementById("index").style.pointerEvents = "none";
+  }
+  function closeSearch() {
+      document.getElementById("search-border").style.display = "none";
+      document.getElementById("postlist").style.pointerEvents = "auto";
+      document.getElementById("index").style.pointerEvents = "auto";
+      $('#local-search-input').val('');
+      $('#local-search-result').html('');
   }

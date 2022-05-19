@@ -26,16 +26,6 @@
         <img src="https://codeforces.com/favicon.ico" alt="CF" width="24" height="24"></a>
     </div>
 
-    <script>
-        function Search() {
-            document.getElementById("add").innerHTML = "段落已修改。";
-            document.getElementById("search-border").style.display = "block";
-        }
-        function closeSearch() {
-            document.getElementById("search-border").style.display = "none";
-        }
-    </script>
-
 
     <div class="list-group">
         <a class="list-group-item" href="/"><i class="fa fa-home fa-fw"></i>&nbsp; 首页</a>
@@ -45,19 +35,5 @@
         <a class="list-group-item" href="/template"><i class="fa fa-file-code-o fa-fw"></i>&nbsp; 模板</a>
     </div>
 
-    
-
-    <form class="site-search-form">
-        <input type="text" id="local-search-input" class="st-search-input" />
-    </form>
-    <div id="local-search-result" class="local-search-result-cls"></div>
-
-    <div id = "add">haha</div>
-
-    <script>
-        var path = "/search.xml";
-        searchFunc(path, 'local-search-input', 'local-search-result');
-    </script>
-    
 </div>
 

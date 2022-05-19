@@ -14,14 +14,38 @@
       <div id = "index"> 
         <%- partial('_partial/sidebar') %>
       </div>
-      
-    </div>
+
+      <div style="position: fixed;top: 2%;right: 1%">
+        <p id="site-time" style="text-align: center;font-family: consolas;font-size: 20px"></p>
+        <script>
+          function mytime(){
+            var a = new Date();
+            var b = a.toLocaleTimeString();
+            var c = a.toLocaleDateString();
+            document.getElementById("site-time").innerHTML = c + "<br>" + b;
+          }
+          setInterval(function() {mytime()}, 10);
+        </script>
+      </div>
+    </div>  
+  
     <div id = "postlist">
       <%- partial('_partial/postlist') %>
     </div>
 
     <div id = "search-border">
-      <button onclick = "closeSearch()"><i class="fa fa-times-circle"></i></button>
+      <form class="site-search-form">
+        <div style = "background-color: #eeeeee;">
+          <input type="text" id="local-search-input" class="st-search-input" />
+          <i class="fa fa-times-circle" onclick = "closeSearch()"></i>
+        </div>
+      </form>
+      <div id="local-search-result" class="local-search-result-cls"></div>
     </div>
+    
+    <script>
+      var path = "/search.xml";
+      searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
   </body>
 </html>
