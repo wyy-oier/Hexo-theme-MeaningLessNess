@@ -1,9 +1,3 @@
-为 Hexo 引擎博客开发个性化主题。
-
-作者： WyyOIer
-
-# 更新日志
-
 ## 0.1.0 (Beta)  - 2022/5/19
 
 添加：
@@ -26,3 +20,34 @@
 
    <img src="https://s2.loli.net/2022/05/19/SYtnrVoP9Hl5xNI.png" alt="MeaningLessNess - 006.png" style="zoom: 50%;" />
 
+## 0.2.0(Beta) - 2022/5/29
+
+添加：关于 $\text{about}$ 页面
+
+更改：将用 ``` `````` ``` 括起来的代码颜色由 ```#e96900``` 更改为 ```c7524e```。
+
+## 0.2.1(Beta) - 2022/5/30
+
+修复：修复了站内大部分链接访问后变换颜色的问题。
+
+## 0.3.0(Beta) - 2022/6/5
+
+添加：友链 $\text{link}$ 页面
+
+## 0.3.1(Beta) - 2022/7/15
+
+更改：更改了 $\LaTeX$ 的源码显示。
+
+<img src="https://s2.loli.net/2022/07/15/Gpy3Y6o7OimuIlW.png" alt="MeaningLessNess - 007.png" style="zoom: 67%;" />
+
+<img src="https://s2.loli.net/2022/07/15/wgvVfubxy36enKW.png" alt="MeaningLessNess - 008.png" style="zoom:67%;" />
+
+更改：更改了文章一级标题，二级标题，三级标题的显示。
+
+![MeaningLessNess - 009.png](https://s2.loli.net/2022/07/15/BbS6CtIflzHg9uF.png)
+
+![MeaningLessNess - 010.png](https://s2.loli.net/2022/07/15/1AdQitSlkJsYnEb.png)
+
+更改：更改了目录列表的显示方式。
+
+![MeaningLessNess - 011.png](https://s2.loli.net/2022/07/15/eNH3nVo2bc4skwr.png)

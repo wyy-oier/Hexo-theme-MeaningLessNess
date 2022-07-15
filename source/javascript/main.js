@@ -1,5 +1,6 @@
 $(document).ready(function () {
     showArticleIndex();
+    fillImageName();
 });
 
 function showArticleIndex() {
@@ -7,35 +8,60 @@ function showArticleIndex() {
     // 如果不够，可以加上 h4 ,只是我个人觉得，前 3 个就够了，出现第 4 层就目录就太长了，太细节了。
     var h1List = h2List = h3List = [];
     var labelList = $("#article").children();
-    for ( var i=0; i<labelList.length; i++ ) {
-        if ( $(labelList[i]).is("h1") ) {
+    var h1Cnt = h2Cnt = h3Cnt = 0;
+    for(var i = 0;i < labelList.length;i++) {
+        if ($(labelList[i]).is("h1")) {
+            ++h1Cnt;
             h2List = new Array();
-            h1List.push({node: $(labelList[i]), id: i, children: h2List});
+            h1List.push({node: $(labelList[i]), id: i, children: h2List, cnt1: h1Cnt, cnt2: 0, cnt3: 0});
+            h2Cnt = h3Cnt = 0;
         }
 
         if ( $(labelList[i]).is("h2") ) {
+            ++h2Cnt;
             h3List = new Array();
-            h2List.push({node: $(labelList[i]), id: i, children: h3List});
+            h2List.push({node: $(labelList[i]), id: i, children: h3List, cnt1: h1Cnt, cnt2: h2Cnt, cnt3: 0});
+            h3Cnt = 0;
         }
 
         if ( $(labelList[i]).is("h3") ) {
-            h3List.push({node: $(labelList[i]), id: i, children: []});
+            ++h3Cnt;
+            h3List.push({node: $(labelList[i]), id: i, children: [], cnt1: h1Cnt, cnt2: h2Cnt, cnt3: h3Cnt});
         }
     }
 
     // 闭包递归，返回树状 html 格式的文章目录索引
     function show(tocList) {
-        var content = "<ul>";
+        var content = "";
         tocList.forEach(function (toc) {
+            console.log(toc.node);
             toc.node.before('<span class="anchor" id="_label'+toc.id+'"></span>');
-            if ( toc.children == 0 ) {
-                content += '<li><a href="#_label'+toc.id+'">'+toc.node.text()+'</a></li>';
+            if (toc.children == 0) {
+                if(toc.cnt2 == 0) {
+                    content += '<a href="#_label'+toc.id+'">'+ toc.cnt1 + ' ' + toc.node.text()+'</a></br>';
+                }
+                else if(toc.cnt3 == 0) {
+                    content += '<a href="#_label'+toc.id+'">'+ toc.cnt1 + '.' + toc.cnt2 + ' ' + toc.node.text()+'</a></br>';
+                }
+                else {
+                    content += '<a href="#_label'+toc.id+'">'+ toc.cnt1 + '.' + toc.cnt2 + '.' + toc.cnt3 + ' ' + toc.node.text()+'</a></br>'
+                }
             }
             else {
-                content += '<li><a href="#_label'+toc.id+'">'+toc.node.text()+'</a>'+show(toc.children)+'</li>';
+                if(toc.cnt2 == 0) {
+                    content += '<a href="#_label'+toc.id+'">'+ toc.cnt1 + ' ' +toc.node.text()+'</a></br>';
+                }
+                else if(toc.cnt3 == 0) {
+                    content += '<a href="#_label'+toc.id+'">'+ toc.cnt1 + '.' + toc.cnt2 + ' ' + toc.node.text()+'</a></br>';
+                }
+                else {
+                    content += '<a href="#_label'+toc.id+'">'+ toc.cnt1 + '.' + toc.cnt2 + '.' + toc.cnt3 + ' ' + toc.node.text()+'</a></br>'
+                }
+                content += show(toc.children);
             }
         });
-        content += "</ul>"
+        // content += "</ul>"
+        console.log(content);
         return content;
     }
 
@@ -69,4 +95,31 @@ function showArticleIndex() {
             }
         });
     });
+}
+
+function fillImageName() {
+    var labelList = $("#article").children(), imgList = [];
+    var res = 0;
+    
+
+    function dfs(ulist) {
+        for(var i = 0;i < ulist.length;i++) {
+            if($(ulist[i]).is("img")) {
+                imgList.push({node: $(ulist[i]), alt: ulist[i].alt});
+            }
+            var vlist = ulist[i].children;
+            if(vlist.length != 0) {
+                dfs(vlist);
+            }
+        }
+
+    }
+
+    dfs(labelList);
+
+    imgList.forEach(function (image) {
+        image.node.after('<p class = image-name>' + image.alt + '</p>');
+    });
+
+    console.log('res: ' + res);
 }

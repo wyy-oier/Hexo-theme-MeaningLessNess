@@ -3,8 +3,8 @@
   	<link rel="stylesheet" href="/css/main.css">
   	<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type = "text/javascript" async src="/javascript/main.js"></script>
+    <script id="MathJax-script" async src="/javascript/math/tex-mml-chtml.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         MathJax = {
@@ -37,49 +37,27 @@
 
 <body>
 
+<% if(is_current("/links")) { %>
+    <%- partial('_pages/links') %>
+<% } %>
+
+<% if(is_current("/template")) { %>
+    <%- partial('_pages/template') %>
+<% } %>
+
+
 <% if(is_post() == true) { %>
 
-    <div style = "width: 10%;height: 100%;float: left">
+    <div style = "width: 2%;height: 100%;float: left">
     </div>
 
     <div id = "article">
 
-        <div id = "post-title"> <%- page.title %> </div>
         <div id = "post-author"> By <%- theme.author %> </div>
         <br>
         <div id = "post-date"> created on <%- date(page.date, "YYYY-MM-DD HH:mm:ss") %> </div>
         <div id = "post-updated"> updated on <%- date(page.updated, "YYYY-MM-DD HH:mm:ss") %> </div>
         <%- page.content %>
-
-        <script>
-            var labelList = $("#article").children(), imgList = [];
-            console.log('labellength: ' + labelList.length);
-            var res = 0;
-            
-
-            function dfs(ulist) {
-                for(var i = 0;i < ulist.length;i++) {
-                    console.log(ulist[i]);
-                    if($(ulist[i]).is("img")) {
-                        imgList.push({node: $(ulist[i]), alt: ulist[i].alt});
-                    }
-                    var vlist = ulist[i].children;
-                    if(vlist.length != 0) {
-                        dfs(vlist);
-                    }
-                }
-
-            }
-
-            dfs(labelList);
-
-            imgList.forEach(function (image) {
-                image.node.after('<p class = image-name>' + image.alt + '</p>');
-            });
-
-            console.log('res: ' + res);
-
-        </script>
 
     </div>
 
