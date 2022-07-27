@@ -1,23 +1,28 @@
-<div style="height: 2000px;width: 800px;position: absolute;top: 100px;right: 50px">
+    <div class = "writing">
+        <h1>Writing.</h1>
+    </div>
+
     <section class="posts">
         <% page.posts.each(function (post) { %>
         <article class="post">
             
-            <div style="height: 32px;width: 600px;"></div>
             <div class="post-title" style="width:600px; height: 32px">
                 <div>
-                    <% if(post.top != 0) { %>
-                        <div class = "post-meta-top">
-                            <i class="fa fa-thumb-tack"></i>
-                            <text>top:<%- post.top %></text>
-                        </div>
-                    <% } %>
+                    
+                    <div class = "post-meta-top">
+                        <% if(post.top != 0) { %>
+                                <i class="fa fa-thumb-tack"></i>
+                                <text>top:<%- post.top %></text>
+                        <% } %>
+                
+                    </div>
+                    
+                    <div class="post-time"><%- date(post.date, "YYYY-MM-DD") %></div>
+
                     <a class="post-title-link" href="<%- url_for(post.path) %>">
                         <%= post.title %>
                     </a>
-                    
-
-                    <span class="post-time"><%- date(post.date, "YYYY-MM-DD") %></span>
+                
 
 
                     <%- list_categories(post.categories, {
@@ -32,15 +37,8 @@
                 </div>
 
             </div>
-            <div class="post-meta">
-           <!-- <span class="post-time"><%- date(post.date, "YYYY-MM-DD") %></span> -->
-            </div>
         
         
         </article>
         <% }) %>
     </section>
-</div>
-
-<script>
-</script>

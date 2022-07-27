@@ -51,3 +51,26 @@
 更改：更改了目录列表的显示方式。
 
 ![MeaningLessNess - 011.png](https://s2.loli.net/2022/07/15/eNH3nVo2bc4skwr.png)
+
+## 0.4.0(Beta) - 2022/7/27
+
+添加：[Valine 一款快速、简洁且高效的无后端评论系统。](https://valine.js.org/)
+
+<img src="https://s2.loli.net/2022/07/27/pRMnzAgFG7xwQyd.jpg" alt="MeaningLessNess - 012.jpg" style="zoom: 67%;" />
+
+添加：[文章阅读量统计。](https://valine.js.org/visitor.html)
+
+更改：文章主页 $\text{index}$、文章页首 $\text{post-head}$ 的布局。
+
+<img src="https://s2.loli.net/2022/07/27/rGXNVyLgfT4tB35.jpg" alt="MeaningLessNess - 013.jpg" style="zoom:67%;" />
+
+<img src="https://s2.loli.net/2022/07/27/2ewfFvgkcnTjudN.jpg" alt="MeaningLessNess - 014.jpg" style="zoom:67%;" />
+
+更改：代码块由 $\text{highlight}$ 显示改为 $\text{hexo-prism-plugin}$ ，显示更美观，但暂时未解决 $\text{markup}$ 被加载的问题。
+
+<img src="https://s2.loli.net/2022/07/27/x97oR45L6svjwpP.jpg" alt="MeaningLessNess - 015.jpg" style="zoom:67%;" />
+
+更改：在文章界面加入 $\text{sidebar}$。
+
+修复：修复了没有 ```<h1><h2><h3>``` 标题还会显示目录边框的问题。
+

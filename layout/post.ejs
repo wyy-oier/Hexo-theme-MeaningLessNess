@@ -6,10 +6,12 @@
     <script type = "text/javascript" async src="/javascript/main.js"></script>
     <script id="MathJax-script" async src="/javascript/math/tex-mml-chtml.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <script>
         MathJax = {
             tex: {
-                inlineMath: [['$', '$']]
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']]
             },
             svg: {
                 fontCache: 'global'
@@ -18,52 +20,64 @@
     </script>
 
 
-    <script type="text/javascript" src="/javascript/codeBlocks/codeBlockFuction.js"></script>
-    <script type="text/javascript" src="/javascript/codeBlocks/codeCopy.js"></script>
-    <script type="text/javascript" src="/javascript/codeBlocks/clipboard.min.js"></script>
-    <script type="text/javascript" src="/javascript/codeBlocks/codeShrink.js"></script> 
-    <style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
-   
-    
-    <!--
-    <link rel="stylesheet" href="/prism/prism-line-numbers.min.css">
-    <script src="/prism/prism-line-numbers.min.js"></script>
-    -->
+   <!-- <script type="text/javascript" src="/javascript/codeBlocks/codeBlockFuction.js"></script> -->
+   <!-- <script type="text/javascript" src="/javascript/codeBlocks/codeCopy.js"></script> -->
+   <!-- <script type="text/javascript" src="/javascript/codeBlocks/clipboard.min.js"></script> -->
+   <!-- <script type="text/javascript" src="/javascript/codeBlocks/codeShrink.js"></script> -->
+   <!-- <style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style> -->
 
-    <link rel="stylesheet" href="/highlight/styles/atom-one-dark.min.css">
-    <script src="/highlight/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <!-- <link rel="stylesheet" href="/highlight/styles/atom-one-dark.min.css"> -->
+    <!-- <script src="/highlight/highlight.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
 </head>
 
 <body>
 
-<% if(is_current("/links")) { %>
-    <%- partial('_pages/links') %>
-<% } %>
 
-<% if(is_current("/template")) { %>
-    <%- partial('_pages/template') %>
-<% } %>
-
-
-<% if(is_post() == true) { %>
-
-    <div style = "width: 2%;height: 100%;float: left">
+<div id = "background">
+    <div id = "index">
+        <%- partial('_partial/sidebar') %>
     </div>
 
-    <div id = "article">
+    <% if(is_current("/links")) { %>
+        <%- partial('_pages/links') %>
+    <% } %>
 
-        <div id = "post-author"> By <%- theme.author %> </div>
-        <br>
-        <div id = "post-date"> created on <%- date(page.date, "YYYY-MM-DD HH:mm:ss") %> </div>
-        <div id = "post-updated"> updated on <%- date(page.updated, "YYYY-MM-DD HH:mm:ss") %> </div>
-        <%- page.content %>
+    <% if(is_current("/template")) { %>
+        <%- partial('_pages/template') %>
+    <% } %>
 
-    </div>
 
-    <div id = "toc">
-    </div>
+    <% if(is_post() == true) { %>
 
-<% } %>
+        <div id = "article">
+            <div id = "post-title"> <%- page.title %> </div>
+            <div id = "post-author"> By <%- theme.author %> | </div>
+            <div id = "post-date" title = "发布时间"> <%- date(page.date, "YYYY-MM-DD HH:mm:ss") %> / </div>
+            <div id = "post-updated" title = "更新时间"> <%- date(page.updated, "YYYY-MM-DD HH:mm:ss") %> </div>
+            <span class = "leancloud_visitors" id = "<%- url_for(page.path) %>">
+                <text class="post-meta-item-text">阅读数 </text>
+                <i class="leancloud-visitors-count">nan</i>
+            </span>
+            <br>
+            <%- page.content %>
+            <div id="vcomments"></div>
+        </div>
+
+        <div id = "toc">
+        </div>
+
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'CEGJD6I3uLgJeTF6fPsqgGmw-gzGzoHsz',
+                appKey: 'R3wowhGv7IL3peB3tT06CjzS',
+                visitor: true
+            })
+        </script>
+
+    <% } %>
+
+</div>
 
 </body>

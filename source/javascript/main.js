@@ -60,41 +60,47 @@ function showArticleIndex() {
                 content += show(toc.children);
             }
         });
-        // content += "</ul>"
-        console.log(content);
         return content;
     }
 
   // 最后组合成 div 方便 css 设计样式，添加到指定位置
     $("#toc").empty();
-    $("#toc").append(show(h1List));
+    if(h1Cnt == 0) {
+        document.getElementById("toc").style.display = "none";
+    }
+    else {
+        $("#toc").append(show(h1List));
+    }
 
     // 点击目录索引链接，动画跳转过去，不是默认闪现过去
-    $("#toc a").on("click", function(e){
-        e.preventDefault();
-        // 获取当前点击的 a 标签，并前触发滚动动画往对应的位置
-        var target = $(this.hash);
-        $("body, html").animate(
-            {'scrollTop': target.offset().top},
-            500
-        );
-    });
+    // $("#toc a").on("click", function(e){
+    //     e.preventDefault();
+    //     console.log(this.hash);
+    //     // 获取当前点击的 a 标签，并前触发滚动动画往对应的位置
+    //     var target = $(this.hash);
+    //     console.log(target);
+    //     console.log(target.offset());
+    //     $("#article").animate(
+    //         {'scrollTop': target.offset().top},
+    //         1000
+    //     );
+    // });
 
     // 监听浏览器滚动条，当浏览过的标签，给他上色。
-    $(window).on("scroll", function(e){
-        var anchorList = $(".anchor");
-        anchorList.each(function(){
-            var tocLink = $('#toc a[href="#'+$(this).attr("id")+'"]');
-            var anchorTop = $(this).offset().top;
-            var windowTop = $(window).scrollTop();
-            if ( anchorTop <= windowTop+50 ) {
-                tocLink.addClass("read");
-            }
-            else {
-                tocLink.removeClass("read");
-            }
-        });
-    });
+    // $(window).on("scroll", function(e){
+    //     var anchorList = $(".anchor");
+    //     anchorList.each(function(){
+    //         var tocLink = $('#toc a[href="#'+$(this).attr("id")+'"]');
+    //         var anchorTop = $(this).offset().top;
+    //         var windowTop = $(window).scrollTop();
+    //         if ( anchorTop <= windowTop+50 ) {
+    //             tocLink.addClass("read");
+    //         }
+    //         else {
+    //             tocLink.removeClass("read");
+    //         }
+    //     });
+    // });
 }
 
 function fillImageName() {
@@ -121,5 +127,4 @@ function fillImageName() {
         image.node.after('<p class = image-name>' + image.alt + '</p>');
     });
 
-    console.log('res: ' + res);
 }
