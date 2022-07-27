@@ -6,12 +6,10 @@
     <script type = "text/javascript" async src="/javascript/main.js"></script>
     <script id="MathJax-script" async src="/javascript/math/tex-mml-chtml.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
     <script>
         MathJax = {
             tex: {
-                inlineMath: [['$', '$']],
-                displayMath: [['$$', '$$']]
+                inlineMath: [['$', '$']]
             },
             svg: {
                 fontCache: 'global'
@@ -27,8 +25,10 @@
    <!-- <style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style> -->
 
     <!-- <link rel="stylesheet" href="/highlight/styles/atom-one-dark.min.css"> -->
-    <!-- <script src="/highlight/highlight.min.js"></script> -->
+     <script src="/highlight/highlight.min.js"></script> 
+     <script>hljs.highlightAll();</script>
     <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+    <script id="Valine" src='//unpkg.com/valine/dist/Valine.min.js'></script>
 </head>
 
 <body>
